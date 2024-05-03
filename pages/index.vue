@@ -10,6 +10,8 @@
         <h3>{{ item.attributes.title }}</h3>
         <p>Rating: {{ item.attributes.rating }}</p>
         <p>Body: {{ item.attributes.body[0]?.children[0]?.text || 'No Description' }}</p>
+        <!-- Use NuxtLink to navigate to the dynamic details page -->
+        <NuxtLink :to="{ path: `/details/${item.id}` }">details</NuxtLink>
       </li>
     </ul>
   </div>
@@ -17,8 +19,10 @@
 
 <script>
 import useFetch from '~/hooks/useFetch';
+
 export default {
   setup() {
+    // Fetch the data
     const { data, loading, error } = useFetch('http://localhost:1337/api/reviews');
 
     return { data, loading, error };
